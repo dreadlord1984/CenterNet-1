@@ -61,7 +61,7 @@ We support demo for image/ image folder, video, and webcam.
 
 First, download the models (By default, [ctdet_coco_dla_2x](https://drive.google.com/open?id=1pl_-ael8wERdUREEnaIfqOV_VF2bEVRT) for detection and 
 [multi_pose_dla_3x](https://drive.google.com/open?id=1PO1Ax_GDtjiemEmDVD7oPWwqQkUu28PI) for human pose estimation) 
-from the [Model zoo](readme/MODEL_ZOO.md) and put them if `CenterNet_ROOT/models/`.
+from the [Model zoo](readme/MODEL_ZOO.md) and put them in `CenterNet_ROOT/models/`.
 
 For object detection on images/ video, run:
 
@@ -118,6 +118,12 @@ We provide scripts for all the experiments in the [experiments](experiments) fol
 ## Develop
 
 If you are interested in training CenterNet in a new dataset, use CenterNet in a new task, or use a new network architecture for CenterNet, please refer to [DEVELOP.md](readme/DEVELOP.md). Also feel free to send us emails for discussions or suggestions.
+
+## Third-party resources
+
+- Keras Implementation: [keras-centernet](https://github.com/see--/keras-centernet) from [see--](https://github.com/see--).
+- CenterNet + DeepSORT tracking implementation: [centerNet-deep-sort](https://github.com/kimyoon-young/centerNet-deep-sort) from [kimyoon-young](https://github.com/kimyoon-young).
+- Blogs on training CenterNet on custom datasets (in Chinese): [ships](https://blog.csdn.net/weixin_42634342/article/details/97756458) from [Rhett Chen](https://blog.csdn.net/weixin_42634342) and [faces](https://blog.csdn.net/weixin_41765699/article/details/100118353) from [linbior](https://me.csdn.net/weixin_41765699).
 
 ## License
 

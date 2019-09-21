@@ -21,11 +21,11 @@ _model_factory = {
   'hourglass': get_large_hourglass_net,
 }
 
-def create_model(arch, head, head_conv):
+def create_model(arch, heads, head_conv):
   num_layers = int(arch[arch.find('_') + 1:]) if '_' in arch else 0
   arch = arch[:arch.find('_')] if '_' in arch else arch
   get_model = _model_factory[arch]
-  model = get_model(num_layers, head, head_conv)
+  model = get_model(num_layers=num_layers, heads=heads, head_conv=head_conv)
   return model
 
 def load_model(model, model_path, optimizer=None, resume=False, 
@@ -45,18 +45,22 @@ def load_model(model, model_path, optimizer=None, resume=False,
   model_state_dict = model.state_dict()
 
   # check loaded parameters and created model parameters
+  msg = 'If you see this, your model does not fully load the ' + \
+        'pre-trained weight. Please make sure ' + \
+        'you have correctly specified --arch xxx ' + \
+        'or set the correct --num_classes for your own dataset.'
   for k in state_dict:
     if k in model_state_dict:
       if state_dict[k].shape != model_state_dict[k].shape:
         print('Skip loading parameter {}, required shape{}, '\
-              'loaded shape{}.'.format(
-          k, model_state_dict[k].shape, state_dict[k].shape))
+              'loaded shape{}. {}'.format(
+          k, model_state_dict[k].shape, state_dict[k].shape, msg))
         state_dict[k] = model_state_dict[k]
     else:
-      print('Drop parameter {}.'.format(k))
+      print('Drop parameter {}.'.format(k) + msg)
   for k in model_state_dict:
     if not (k in state_dict):
-      print('No param {}.'.format(k))
+      print('No param {}.'.format(k) + msg)
       state_dict[k] = model_state_dict[k]
   model.load_state_dict(state_dict, strict=False)
 

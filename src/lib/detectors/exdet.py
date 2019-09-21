@@ -12,7 +12,6 @@ from progress.bar import Bar
 import time
 import torch
 
-from external.nms import soft_nms
 from models.decode import exct_decode, agnex_ct_decode
 from models.utils import flip_tensor
 from utils.image import get_affine_transform, transform_preds
@@ -46,7 +45,7 @@ class ExdetDetector(BaseDetector):
                       center_thresh=self.opt.center_thresh,
                       aggr_weight=self.opt.aggr_weight)
       else:
-        dets = self.decode(t_heat, l_heat, b_heat, r_heat, c_heat, K=opt.K,
+        dets = self.decode(t_heat, l_heat, b_heat, r_heat, c_heat, K=self.opt.K,
                       scores_thresh=self.opt.scores_thresh,
                       center_thresh=self.opt.center_thresh,
                       aggr_weight=self.opt.aggr_weight)
